@@ -4,3 +4,12 @@ python-dateutil
 pytz
 six
 tzdata
+
+ipykernel
+
+torch
+torchvision
+transformers
+
+lightgbm
+scikit-learn

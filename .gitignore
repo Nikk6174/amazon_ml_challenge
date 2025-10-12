@@ -18,9 +18,3 @@ data/images/
 models/*.pkl
 
 
-git init
->> git add .
->> git commit -m "first commit"
->> git branch -M main
->> git remote add origin https://github.com/Nikk6174/amazon_ml_challenge.git
->> git push -u origin main
