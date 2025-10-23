@@ -13,3 +13,11 @@ transformers
 
 lightgbm
 scikit-learn
+
+protobuf 
+tiktoken 
+sentencepiece
+
+spacy
+xgboost 
+catboost

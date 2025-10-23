@@ -40,8 +40,8 @@ def main():
     print("--- Starting Feature Generation: Text Embeddings ---")
 
     # --- 1. Load Transformer Model (Load once, use for both) ---
-    print("Loading DistilBERT model and tokenizer...")
-    model_name = 'distilbert-base-uncased'
+    print("Loading DeBERTa model and tokenizer...")
+    model_name = 'microsoft/deberta-v3-base'
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModel.from_pretrained(model_name)
     
