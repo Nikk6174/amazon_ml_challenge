@@ -1,0 +1,44 @@
+# Version control
+.git
+.gitignore
+
+# Python artifacts
+__pycache__
+*.pyc
+*.pyo
+*.egg-info
+venv/
+my-env-310/
+env/
+.venv/
+
+# Jupyter
+notebooks/
+.ipynb_checkpoints/
+
+# Large data files (mounted as volumes instead)
+data/raw/
+data/images/
+data/processed/*.npy
+
+# Model files (mounted as volumes instead)
+models/
+
+# IDE / OS
+.vscode/
+.idea/
+*.swp
+*.swo
+Thumbs.db
+.DS_Store
+
+# Submissions
+submissions/
+
+# Docker
+docker-compose.yml
+docker-compose*.yml
+
+# Documentation
+*.md
+LICENSE

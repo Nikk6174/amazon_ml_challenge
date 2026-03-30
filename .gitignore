@@ -16,5 +16,8 @@ data/images/
 
 # Saved models
 models/*.pkl
+models/ocr/
 
-
+# Docker
+*.tar
+docker-compose.override.yml

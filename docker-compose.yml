@@ -1,0 +1,65 @@
+# ============================================================================
+# Amazon ML Challenge — Docker Compose (GPU-aware)
+# Usage:
+#   docker compose up --build          # CPU mode
+#   docker compose up --build --gpus   # GPU mode (requires nvidia-docker)
+# ============================================================================
+
+version: "3.9"
+
+services:
+  # ---- Main prediction pipeline ----
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: amazon-ml-app
+    restart: unless-stopped
+    ports:
+      - "8501:8501"    # Streamlit UI
+      - "8000:8000"    # FastAPI / REST endpoint
+    volumes:
+      - ./data:/app/data              # Mount dataset directory
+      - ./models:/app/models          # Mount model artifacts
+      - ./submissions:/app/submissions
+    environment:
+      - PYTHONUNBUFFERED=1
+      - MODEL_DEVICE=auto             # "auto" | "cpu" | "cuda"
+      - LOG_LEVEL=INFO
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stinfo/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # ---- OCR training service (on-demand) ----
+  ocr-train:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: amazon-ml-ocr
+    profiles: ["ocr"]                 # Only starts with: docker compose --profile ocr up
+    command: ["src/ocr_trocr_train.py"]
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+    environment:
+      - PYTHONUNBUFFERED=1
+      - EPOCHS=10
+      - BATCH_SIZE=16
+      - LEARNING_RATE=5e-5
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]

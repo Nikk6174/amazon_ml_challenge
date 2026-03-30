@@ -1,3 +1,4 @@
+# Core data science
 numpy
 pandas
 python-dateutil
@@ -5,19 +6,28 @@ pytz
 six
 tzdata
 
+# Jupyter
 ipykernel
 
+# Deep learning
 torch
 torchvision
 transformers
 
+# Gradient boosting ensemble
 lightgbm
 scikit-learn
-
-protobuf 
-tiktoken 
-sentencepiece
-
-spacy
-xgboost 
+xgboost
 catboost
+
+# NLP / tokenisation
+protobuf
+tiktoken
+sentencepiece
+spacy
+
+# OCR (TrOCR fine-tuning & evaluation)
+jiwer
+Pillow
+tqdm
+evaluate
